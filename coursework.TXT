@@ -1,0 +1,237 @@
+﻿资源管理（ResourceManager）
+
+纹理、网格（vertex/index buffers）、材质、骨骼动画、着色器、关卡文件统一加载/缓存/释放。
+
+关卡与场景（Level / Scene）
+
+负责从自定义文件加载实体 (meshes, instanced objects, spawn points, lights)。
+
+渲染器（Renderer）
+
+Forward 或延迟（根据已有代码倾向）。包含子系统：opaque pass、alpha-test pass、instancing pass、skybox、水/屏幕特效、debug draw。
+
+相机与输入（CameraController）
+
+第一/第三人称相机控制（键盘 + 鼠标）。
+
+实体系统（Entity / Component）
+
+StaticMeshComponent、SkinnedMeshComponent、ParticleComponent、ColliderComponent、ScriptComponent（简单交互逻辑）。
+
+动画系统（AnimationController）
+
+骨骼动画播放、混合、状态机（idle/walk/attack/dialogue）。
+
+碰撞与物理（Collision）
+
+AABB / OOBB 检测 + 简单分离/响应（阻挡、触发事件）。
+
+特效（Effects）
+
+Skybox、Water（简单反射/折射或屏幕-space 水波）、Particle System（发射器属性驱动）。
+
+工具与数据格式
+
+自定义关卡文件格式 (文本或二进制)，导出器说明（可用 Blender/Assimp 导出网格然后打包）。
+
+具体实现细节（逐项对照题目要求）
+1) “One or more textured and lit 3D game levels”
+
+实现：至少一个关卡文件 .lvl（自定义）包含：地形/地面 mesh、若干物件实例、光源信息、摄像机出生点、NPC 出生点。
+
+光照：至少实现一个基于 Blinn-Phong 的方向光 + 若干点光源（着色器中传入光源列表）。
+
+验证：在关卡中能看到纹理、光照影响；可切换光源强度做对比截图。
+
+2) “Meshes rendered into the game level”
+数据驱动关卡加载
+Opaque meshes
+
+标准不透明渲染 pass（深度写入/测试，按材质减少 drawcall）。
+
+Alpha-test meshes（例如草）
+
+使用 alpha test (clip) 在片元着色器中：if (texture.a < 0.5) discard;
+
+Render queue: alpha-test 作为独立 pass，仍写深度以正确遮挡。
+
+Vertex shader animation（顶点着色器动画）
+
+示例：风吹草动、旗帜或布（顶点偏移基于顶点属性如 weight 或用顶点ID +世界位置做正弦偏移）。
+
+数据：mesh 可带顶点额外属性（例如 windWeight）。在顶点着色器中按时间与法线偏移位置和法线。
+
+不需要计算骨骼，只是 GPU-side 顶点变形。
+
+Instancing
+
+对树/草/石头等重复物体使用硬件 instancing：
+
+每实例传递 mat4 或分解为 vec3 position, vec3 scale, vec4 quat 存到 instance buffer。
+
+DrawIndexedInstanced 调用。
+
+优化：把同材质同网格的实例批次化。
+
+3) First or third person camera movement（键鼠控制）
+
+支持开关第一/第三人称。基本实现：
+
+鼠标控制 yaw/pitch（限制 pitch 范围），键盘 WASD 前后左右，空格跳（或不实现跳）。
+
+第三人称实现追随与碰撞避免（相机与场景 OBB 检查，防止穿墙）。
+
+手感调整：灵敏度、加速度、平滑阻尼。
+
+4) Animated game characters + animation controller
+
+SkinnedMeshComponent：包含骨骼层次、骨骼逆矩阵、关节矩阵数组。
+
+Animation system：
+
+支持骨骼动画采样 (translation, rotation, scale)，按时间插值（线性 + slerp）。
+
+支持混合（例如移动时 blend Idle->Walk）。
+
+状态机/控制器：定义 state 和 transitions（触发条件：距离、按键、计时器）。
+
+交互：NPC 在玩家进入触发半径后播放 attack 或 dialogue 动画，并执行简单事件（减少生命/打印台词）。
+
+5) 简单 AABB 或 OOBB 碰撞检测和响应
+
+ColliderComponent 提供 AABB/OOBB 数据（基于局部 mesh bounds）。
+
+碰撞检测：
+
+AABB vs AABB（快速）。
+
+OOBB 使用 SAT（分离轴定理）实现基础检测。
+
+响应：
+
+对玩家移动做 swept collision（先移动 X 再 Y 再 Z，分离修正），防止穿透。
+
+对触发器（trigger volumes）只做检测不阻挡（用于对话/触发器）。
+
+6) Normal mapping（或变体）
+
+在材质中支持法线贴图（Tangent空间 normal map）。
+
+顶点需要提供 tangent、bitangent 或在 shader 中构建 TBN。
+
+在 fragment shader：
+
+从 normal map 采样，转换到视空间，与光照模型结合。
+
+可选：实现 parallax occlusion mapping（复杂一些），或至少 parallax offset mapping 以加分。
+
+7) 至少一种讲座中的特效（示例）
+Skybox
+
+Cubemap + 盒子渲染（深度写入禁用，深度测试 <=）。
+
+Water（可选）
+
+屏幕空间反射/折射（较复杂），做简化版：
+
+平面水面：反射贴图（渲染场景到纹理，反转相机 Y，裁剪平面）。
+
+加动感：顶点/片段上叠加法线扰动 + Fresnel 权重。
+
+Particle System（推荐）
+
+CPU 或 GPU 发射器，支持生命周期、速度、重力、颜色插值、大小插值；用 additive blending 或 alpha blended billboard。
+
+用于火焰、爆炸、击中效果。
+
+着色器需求一览
+
+Standard PBR/Blinn-Phong shader（支持 diffuse + spec + normal map + tiling）。
+
+Alpha-test shader（带 alpha discard）。
+
+Skinned vertex shader（骨骼矩阵影响顶点）。
+
+Vertex-animated shader（wind / waves）。
+
+Instancing vertex shader（读取 instance transform）。
+
+Post-process / water / particle shaders（如需要）。
+
+数据格式与工具链建议
+
+模型导出：使用 Assimp 在工具链中导入 FBX/OBJ，然后在构建环节转换成你自定义 .mesh（包含顶点格式、索引、tangent、骨骼权重、AABB）。
+
+关卡文件：JSON 简洁、易读，或二进制更小。先用 JSON 实现，提交版时可以转二进制（可选）。
+
+纹理：PNG (带 alpha)；法线图为 RGB format (normal map)。
+
+如果老师给了 starter code，优先用他们的 mesh/mesh-loader 接口扩展。
+
+性能与整理
+
+批次合并：按材质/着色器排序 draw calls，instancing 最大化重复网格。
+
+Level of Detail（可选）：提供 LOD for heavy meshes（可做或不做，非必需）。
+
+Debug UI：显示 drawcalls 数、FPS、顶点数、实体数量、碰撞框（用于 marking）。
+
+开发分步与验收检查表（建议实现顺序）
+
+基础渲染/资源管理就绪（纹理/mesh 加载）。✅
+
+实现关卡 loader 并能在场景中摆放 mesh。✅
+
+相机 + 输入（第一/第三人称切换）。✅
+
+Opaque 渲染 + Alpha-test 渲染（草丛）并验证透明裁剪。✅
+
+Instancing（树木/石头）并验证性能。✅
+
+顶点动画（风吹草）效果实现。✅
+
+Skinned mesh + animation controller（至少一个 NPC 动画循环 + attack）。✅
+
+碰撞 AABB/OOBB 与玩家响应（阻挡/触发）。✅
+
+Normal map 实现（至少一处材质展示）。✅
+
+至少一种特效（particle 或 water + skybox）。✅
+
+Debug 渲染与演示关卡打磨（录屏/截图）。✅
+
+阶段 1 — 整理渲染与资源系统（2 天）
+//增加 Skybox
+增加 AlphaTest shader 
+增加 NormalMap shader
+增加 Instancing
+增加 Wind Vertex Animation
+阶段 2 — 摄像机 + 玩家（1 天）
+//第一人称 / 第三人称 CameraController
+//WASD 移动
+阶段 3 — 碰撞系统（1 天）
+给每个 StaticModel 自动生成 AABB
+玩家移动时执行 AABB 碰撞检测
+阶段 4 — 关卡文件系统（2 天）
+LevelLoader 加载 JSON
+创建 StaticEntity / AnimatedEntity
+支持实例化树木（instanced）
+支持草（alpha-test + wind）
+阶段 5 — 特效（1 天）
+选一个：
+//Skybox（推荐）
+Particle system
+Water plane 
+
+-	One or more textured and lit 3D game levels
+-	Meshes rendered into the game level
+o	Data driven level loading, i.e. load the game meshes and data from a custom file format
+o	Opaque meshes
+o	Meshes such as grass which require alpha testing
+o	Mesh which includes vertex shader animation 
+o	Instancing of meshes such as trees
+-	First or third person camera movement controlled with keyboard and mouse
+-	Animated game characters which interact with the player in some way via the use of an animation controller (attack / dialogue etc; this depends on the type of game)
+-	Simple AABB or OOBB collision detection and response
+-	Normal mapping or variant ( e.g. displacement or parallax occlusion mapping)
+-	Simulating one or more effects covered in the lectures (e.g. water, particle system, skybox)

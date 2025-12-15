@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{7462fa19-ecdc-47dc-83e6-44f665987b07}</ProjectGuid>
+    <RootNamespace>Project6</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="Core.h" />
+    <ClInclude Include="GEMLoader.h" />
+    <ClInclude Include="Maths.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="PSO.h" />
+    <ClInclude Include="Shaders.h" />
+    <ClInclude Include="stb_image.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="Timer.h" />
+    <ClInclude Include="Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Core.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Window.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\acacia.gem" />
+    <None Include="Models\Grass_Beach_01a.gem" />
+    <None Include="Models\Grass_Beach_01b.gem" />
+    <None Include="Models\Grass_Beach_01c.gem" />
+    <None Include="Models\Grass_Beach_01d.gem" />
+    <None Include="Models\Grass_Beach_01e.gem" />
+    <None Include="Models\Grass_Beach_01f.gem" />
+    <None Include="Models\Grass_Beach_01g.gem" />
+    <None Include="Models\Grass_Beach_01h.gem" />
+    <None Include="Models\Grass_Beach_01i.gem" />
+    <None Include="Models\Grass_Beach_01j.gem" />
+    <None Include="Models\Grass_Beach_01k.gem" />
+    <None Include="Models\Grass_Beach_01l.gem" />
+    <None Include="Models\Grass_Beach_01m.gem" />
+    <None Include="Models\Grass_Beach_01n.gem" />
+    <None Include="Models\Grass_Mix_Full_01a.gem" />
+    <None Include="Models\Grass_Mix_Full_01b.gem" />
+    <None Include="Models\Grass_Mix_Full_01c.gem" />
+    <None Include="Models\Grass_Mix_Full_01d.gem" />
+    <None Include="Models\Grass_Mix_Full_01e.gem" />
+    <None Include="Models\Grass_Mix_Full_01f.gem" />
+    <None Include="Models\Grass_Mix_Full_01g.gem" />
+    <None Include="Models\Grass_Mix_Full_01h.gem" />
+    <None Include="Models\Grass_Mix_Full_01i.gem" />
+    <None Include="Models\Grass_Mix_Full_01i1.gem" />
+    <None Include="Models\Grass_Mix_Full_01j.gem" />
+    <None Include="Models\Grass_Mix_Full_01k.gem" />
+    <None Include="Models\Grass_Mix_Full_01m.gem" />
+    <None Include="Models\Grass_Mix_Full_01n.gem" />
+    <None Include="Models\Grass_Mix_Full_01o.gem" />
+    <None Include="Models\Grass_Mix_Full_01p.gem" />
+    <None Include="Models\Grass_Mix_Full_01q.gem" />
+    <None Include="Models\oak.gem" />
+    <None Include="Models\TRex.gem" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Models\Textures\acacia branch_ALB.png" />
+    <Image Include="Models\Textures\acacia branch_NH.png" />
+    <Image Include="Models\Textures\acacia branch_RMAX.png" />
+    <Image Include="Models\Textures\oak leaf_ALB.png" />
+    <Image Include="Models\Textures\oak leaf_NH.png" />
+    <Image Include="Models\Textures\oak leaf_RMAX.png" />
+    <Image Include="Models\Textures\T-rex_Base_Color_alb.png" />
+    <Image Include="Models\Textures\T-rex_Base_Color_nh.png" />
+    <Image Include="Models\Textures\T-rex_Base_Color_rmax.png" />
+    <Image Include="Models\Textures\Textures1_ALB.png" />
+    <Image Include="Models\Textures\Textures1_NH.png" />
+    <Image Include="Models\Textures\Textures1_RMAX.png" />
+    <Image Include="Models\Textures\TX_GrassMix_01a_ALB.png" />
+    <Image Include="Models\Textures\TX_GrassMix_01a_NH.png" />
+    <Image Include="Models\Textures\TX_GrassMix_01a_RMAX.png" />
+    <Image Include="Models\Textures\TX_Grass_Beach_01a_ALB.png" />
+    <Image Include="Models\Textures\TX_Grass_Beach_01a_NH.png" />
+    <Image Include="Models\Textures\TX_Grass_Beach_01a_RMAX.png" />
+    <Image Include="sky\sky1.png" />
+    <Image Include="sky\sky2.png" />
+    <Image Include="sky\sky3.png" />
+    <Image Include="sky\sky4.png" />
+    <Image Include="sky\sky5.png" />
+    <Image Include="sky\sky6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="coursework.TXT" />
+    <Text Include="PSNormalMap.txt" />
+    <Text Include="PSTextured.txt" />
+    <Text Include="PSUntextured.txt" />
+    <Text Include="PS_AlphaTest.txt" />
+    <Text Include="PS_Skybox.TXT" />
+    <Text Include="VS.txt" />
+    <Text Include="VSAnim.txt" />
+    <Text Include="VS_grass.txt" />
+    <Text Include="VS_Skybox.TXT" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,23 @@
+Texture2D baseColorTex : register(t0);
+Texture2D opacityTex   : register(t1);
+SamplerState samp      : register(s0);
+
+struct PS_INPUT
+{
+    float4 Pos       : SV_POSITION;
+    float3 Normal    : NORMAL;
+    float3 Tangent   : TANGENT;
+    float2 TexCoords : TEXCOORD;
+};
+
+float4 PS(PS_INPUT input) : SV_Target0
+{
+    float alpha = opacityTex.Sample(samp, input.TexCoords).r;
+
+    if (alpha > 0.5f)
+        discard;
+
+    float3 color = baseColorTex.Sample(samp, input.TexCoords).rgb;
+    return float4(color, 1.0f);
+}
+

@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Animation.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Core.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GEMLoader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Maths.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PSO.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Core.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\TRex.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\acacia.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\oak.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Beach_01a.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Beach_01b.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Beach_01c.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Beach_01d.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Beach_01e.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Beach_01f.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Beach_01g.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Beach_01h.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Beach_01i.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Beach_01j.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Beach_01k.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Beach_01l.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Beach_01m.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Beach_01n.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Mix_Full_01a.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Mix_Full_01b.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Mix_Full_01c.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Mix_Full_01d.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Mix_Full_01e.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Mix_Full_01f.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Mix_Full_01g.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Mix_Full_01h.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Mix_Full_01i.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Mix_Full_01i1.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Mix_Full_01j.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Mix_Full_01k.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Mix_Full_01m.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Mix_Full_01n.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Mix_Full_01o.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Mix_Full_01p.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Grass_Mix_Full_01q.gem">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Models\Textures\Textures1_ALB.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\Textures1_NH.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\Textures1_RMAX.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\T-rex_Base_Color_alb.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\T-rex_Base_Color_nh.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\T-rex_Base_Color_rmax.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="sky\sky1.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="sky\sky2.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="sky\sky3.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="sky\sky4.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="sky\sky5.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="sky\sky6.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\acacia branch_ALB.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\acacia branch_NH.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\acacia branch_RMAX.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\oak leaf_ALB.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\oak leaf_NH.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\oak leaf_RMAX.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\TX_Grass_Beach_01a_ALB.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\TX_Grass_Beach_01a_NH.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\TX_Grass_Beach_01a_RMAX.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\TX_GrassMix_01a_ALB.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\TX_GrassMix_01a_NH.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\TX_GrassMix_01a_RMAX.png">
+      <Filter>资源文件</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="PSTextured.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="PSUntextured.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="VS.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="VSAnim.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="coursework.TXT" />
+    <Text Include="PSNormalMap.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="VS_Skybox.TXT">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="PS_Skybox.TXT">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="PS_AlphaTest.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="VS_grass.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

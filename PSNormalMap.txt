@@ -1,0 +1,19 @@
+Texture2D tex : register(t0);
+Texture2D normalMap : register(t1);
+SamplerState s : register(s0);
+
+PS_INPUT ...
+float3 worldNormal = normalize(input.Normal);
+float3 worldTangent = normalize(input.Tangent);
+float3 worldBitangent = cross(worldNormal, worldTangent);
+
+// normal from texture
+float3 normalTex = normalMap.Sample(s, input.TexCoords).xyz * 2 - 1;
+
+float3 finalNormal = normalize(
+    normalTex.x * worldTangent +
+    normalTex.y * worldBitangent +
+    normalTex.z * worldNormal
+);
+
+return float4(abs(finalNormal), 1);
