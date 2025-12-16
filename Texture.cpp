@@ -61,6 +61,10 @@ bool Texture::load(Core* core, const std::string& filename) {
 	heapOffset = core->srvHeap.used - 1;
 	if (uploadData != texels)
 		delete[] uploadData;
+	//ÌùÍ¼ºÍheap
+	char buffer[256];
+	sprintf_s(buffer, "ÌùÍ¼ºÍheap textureFilenames = %s heapIndex = %d\n", filename.c_str(), heapOffset);
+	OutputDebugStringA(buffer);
 	stbi_image_free(texels);
 }
 

@@ -122,6 +122,10 @@ public:
 			if (bindDesc.Type == D3D_SIT_TEXTURE)
 			{
 				textureBindPoints.insert({bindDesc.Name, bindDesc.BindPoint});
+
+				char dbg[512];
+				sprintf_s(dbg, "Shader reflection: texture '%s' bound to t%u\n", bindDesc.Name, bindDesc.BindPoint);
+				OutputDebugStringA(dbg);
 			}
 		}
 		reflection->Release();
@@ -169,8 +173,11 @@ public:
 	}
 	void updateTexturePS(Core* core, std::string name, int heapOffset) {
 		UINT bindPoint = textureBindPoints[name];
-		D3D12_GPU_DESCRIPTOR_HANDLE handle = core->srvHeap.gpuHandle;
-		handle.ptr = handle.ptr + (UINT64)(heapOffset - bindPoint) * (UINT64)core->srvHeap.incrementSize;
+		char buffer[256];
+		sprintf_s(buffer, "updateTexturePS: shaderTexName='%s' bindPoint=%u heapOffset=%d\n", name.c_str(), bindPoint, heapOffset);
+		OutputDebugStringA(buffer);
+		D3D12_GPU_DESCRIPTOR_HANDLE handle = core->srvHeap.gpuStart;
+		handle.ptr += (UINT64)(heapOffset - bindPoint) * core->srvHeap.incrementSize;
 		core->getCommandList()->SetGraphicsRootDescriptorTable(2, handle);
 	}
 

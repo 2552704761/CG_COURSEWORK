@@ -110,6 +110,9 @@ public:
 			{
 				int heapIndex = textures->find(textureFilenames[i]);
 				shaders->updateTexturePS(core, "GrassAlpha", "tex", heapIndex);
+				char buffer[256];
+				sprintf_s(buffer, "drawGrass textureFilenames = %s heapIndex = %d\n", textureFilenames[i].c_str(), heapIndex);
+				OutputDebugStringA(buffer);
 				meshes[i]->draw(core);
 			}
 		}
@@ -122,6 +125,9 @@ public:
 			{
 				int heapIndex = textures->find(textureFilenames[i]);
 				shaders->updateTexturePS(core, "StaticModel", "tex", heapIndex);
+				char buffer[256];
+				sprintf_s(buffer, "drawStaticModel textureFilenames = %s heapIndex = %d\n", textureFilenames[i].c_str(), heapIndex);
+				OutputDebugStringA(buffer);
 				meshes[i]->draw(core);
 			}
 		}
@@ -206,6 +212,9 @@ public:
 		for (int i = 0; i < meshes.size(); i++)
 		{
 			shaders->updateTexturePS(core, "AnimatedModel", "tex", textures->find(textureFilenames[i]));
+			char buffer[256];
+			sprintf_s(buffer, "drawAnimatedModel textureFilenames = %s heapIndex = %d\n", textureFilenames[i].c_str(), textures->find(textureFilenames[i]));
+			OutputDebugStringA(buffer);
 			meshes[i]->draw(core);
 		}
 	}
@@ -265,9 +274,12 @@ public:
 		Matrix W = Matrix::translation(camPos);
 		shaders->updateConstantVS("SkyBox", "staticMeshBuffer", "W", &W);
 		shaders->updateConstantVS("SkyBox", "staticMeshBuffer", "VP", &vp);
-		shaders->updateTexturePS(core, "SkyBox", "tex", texHeapOffset);
 		shaders->apply(core, "SkyBox");
 		psos->bind(core, "SkyBoxPSO");
+		shaders->updateTexturePS(core, "SkyBox", "tex", texHeapOffset);
+		char buffer[256];
+		sprintf_s(buffer, "drawSkyBox textureFilenames = %s heapIndex = %d\n", "SKY", texHeapOffset);
+		OutputDebugStringA(buffer);
 		domeMesh.draw(core);
 	}
 };
@@ -319,7 +331,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	acacia.load(&core, "Models/acacia.gem", &shaders, &psos, &textures);
 	StaticModel oak;
 	oak.load(&core, "Models/oak.gem", &shaders, &psos, &textures);
-	StaticModel grassmixA;
+	/**/StaticModel grassmixA;
 	grassmixA.load(&core, "Models/Grass_Mix_Full_01a.gem", &shaders, &psos, &textures);
 	StaticModel grassmixB;
 	grassmixB.load(&core, "Models/Grass_Mix_Full_01b.gem", &shaders, &psos, &textures);
@@ -353,7 +365,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	e2.position = Vec3(10, 0, 0);
 	e2.scale = 0.01f;
 	worldObjects.push_back(e2);
-	AnimatedModel animatedModel;
+	/**/AnimatedModel animatedModel;
 	animatedModel.load(&core, "Models/TRex.gem", &psos, &shaders, &textures);
 	Entity e3;
 	e3.animModel = &animatedModel;
@@ -362,7 +374,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	e3.isAnimated = true;
 	worldObjects.push_back(e3);
 	AnimationInstance animatedInstance;
-	animatedInstance.init(&animatedModel.animation, 0);
+	animatedInstance.init(&animatedModel.animation, 0); 
 	skyDome.init(&core, &psos, &textures, &shaders);
 	Timer timer;
 	float t = 0;
@@ -405,7 +417,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		Vec3 camPos = player.position;
 		Matrix v = Matrix::lookAt(
 			camPos,
-			camPos + forward,   // ÉãÏñ»ú·½Ïò
+			camPos + forward,
 			up
 		);
 		vp = v * p;
@@ -427,11 +439,11 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		{
 			animatedInstance.resetAnimationTime();
 		} 
-		shaders.updateConstantVS("AnimatedModel", "staticMeshBuffer", "VP", &vp);
+		//shaders.updateConstantVS("AnimatedModel", "staticMeshBuffer", "VP", &vp);
 		//W = Matrix::scaling(Vec3(0.01f, 0.01f, 0.01f));
 		//animatedModel.draw(&core, &psos, &shaders, &textures, &animatedInstance, vp, W);
 		for (Entity& e : worldObjects)
-			{
+			{ 
 			Matrix W = Matrix::scaling(Vec3(e.scale, e.scale, e.scale)) * Matrix::translation(e.position);
 			if (e.isAnimated == true)
 			{

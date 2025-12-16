@@ -62,6 +62,7 @@ public:
 	D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle;
 	D3D12_GPU_DESCRIPTOR_HANDLE gpuHandle;
 	unsigned int incrementSize;
+	D3D12_GPU_DESCRIPTOR_HANDLE gpuStart;
 	int used;
 	void init(ID3D12Device5* device, int num)
 	{
@@ -72,6 +73,7 @@ public:
 		device->CreateDescriptorHeap(&uavcbvHeapDesc, IID_PPV_ARGS(&heap));
 		cpuHandle = heap->GetCPUDescriptorHandleForHeapStart();
 		gpuHandle = heap->GetGPUDescriptorHandleForHeapStart();
+		gpuStart = gpuHandle;
 		incrementSize = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 		used = 0;
 	}
