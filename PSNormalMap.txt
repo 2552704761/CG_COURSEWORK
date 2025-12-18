@@ -1,19 +1,36 @@
-Texture2D tex : register(t0);
-Texture2D normalMap : register(t1);
-SamplerState s : register(s0);
+Texture2D albedoTex : register(t0);
+Texture2D normalTex : register(t1);
+SamplerState samplerLinear : register(s0);
 
-PS_INPUT ...
-float3 worldNormal = normalize(input.Normal);
-float3 worldTangent = normalize(input.Tangent);
-float3 worldBitangent = cross(worldNormal, worldTangent);
+struct PS_INPUT
+{
+    float4 Pos       : SV_POSITION;
+    float3 Normal    : NORMAL;
+    float3 Tangent   : TANGENT;
+    float2 TexCoords : TEXCOORD;
+};
 
-// normal from texture
-float3 normalTex = normalMap.Sample(s, input.TexCoords).xyz * 2 - 1;
+float4 PS(PS_INPUT input) : SV_Target0
+{
+    float4 colour = albedoTex.Sample(samplerLinear, input.TexCoords);
+    if (colour.a < 0.5) discard ;
+    float3 N = normalize(input.Normal);
+    float3 T = normalize(input.Tangent);
+    float3 B = normalize(cross(N, T));
 
-float3 finalNormal = normalize(
-    normalTex.x * worldTangent +
-    normalTex.y * worldBitangent +
-    normalTex.z * worldNormal
-);
+    float3x3 TBN = float3x3(T, B, N);
 
-return float4(abs(finalNormal), 1);
+    float3 mapNormal = normalTex.Sample(samplerLinear, input.TexCoords).xyz;
+    mapNormal = mapNormal * 2.0f - 1.0f;
+
+    float3 worldNormal = normalize(mul(mapNormal, TBN));
+    worldNormal = normalize(lerp(worldNormal, float3(0,1,0), 0.3));
+    float3 lightDir = normalize(float3(0.3f, 1.0f, 0.2f));
+    float NdotL = saturate(dot(worldNormal, lightDir));
+
+    float3 albedo = albedoTex.Sample(samplerLinear, input.TexCoords).rgb;
+    float3 color = albedo * NdotL;
+
+    return float4(color, 1.0f);
+}
+

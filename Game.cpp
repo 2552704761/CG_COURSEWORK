@@ -16,6 +16,11 @@
 #include <d3dcompiler.h>
 #pragma comment(lib, "d3dcompiler.lib")
 
+struct InstanceData
+{
+	Matrix world;
+};
+
 class Plane
 {
 public:
@@ -68,6 +73,7 @@ class StaticModel
 public:
 	std::vector<Mesh *> meshes;
 	std::vector<std::string> textureFilenames;
+	std::vector<std::string> normalFilenames;
 	void load(Core* core, std::string filename, Shaders* shaders, PSOManager* psos, TextureManager* textures)
 	{
 		GEMLoader::GEMModelLoader loader;
@@ -85,6 +91,8 @@ public:
 			}
 			textureFilenames.push_back(gemmeshes[i].material.find("albedo").getValue());
 			textures->loadTexture(core, gemmeshes[i].material.find("albedo").getValue());
+			normalFilenames.push_back(gemmeshes[i].material.find("nh").getValue());
+			textures->loadTexture(core, gemmeshes[i].material.find("nh").getValue());
 			mesh->init(core, vertices, gemmeshes[i].indices);
 			meshes.push_back(mesh);
 		}
@@ -92,13 +100,16 @@ public:
 		psos->createPSO(core, "StaticModelPSO", shaders->find("StaticModel")->vs, shaders->find("StaticModel")->ps, VertexLayoutCache::getStaticLayout());
 		shaders->load(core, "GrassAlpha", "VS_grass.txt", "PS_AlphaTest.txt");
 		psos->createPSO(core, "GrassAlphaPSO", shaders->find("GrassAlpha")->vs, shaders->find("GrassAlpha")->ps, VertexLayoutCache::getStaticLayout());
+		shaders->load(core, "StaticNormal", "VS.txt", "PSNormalMap.txt");
+		psos->createPSO(core, "StaticNormalPSO", shaders->find("StaticNormal")->vs, shaders->find("StaticNormal")->ps, VertexLayoutCache::getStaticLayout());
 	}
 	void updateWorld(Shaders* shaders, Matrix& w)
 	{
 		shaders->updateConstantVS("StaticModel", "staticMeshBuffer", "W", &w);
 		shaders->updateConstantVS("GrassAlpha", "staticMeshBuffer", "W", &w);
+		shaders->updateConstantVS("StaticNormal", "staticMeshBuffer", "W", &w);
 	}
-	void draw(Core* core, PSOManager* psos, Shaders* shaders, TextureManager* textures, Matrix &vp, const std::string& psoName = "StaticModelPSO", float t = 0)
+	void draw(Core* core, PSOManager* psos, Shaders* shaders, TextureManager* textures, Matrix &vp, const std::string& psoName = "StaticNormalPSO", float t = 0)
 	{
 		if (psoName == "GrassAlphaPSO")
 		{
@@ -110,24 +121,26 @@ public:
 			{
 				int heapIndex = textures->find(textureFilenames[i]);
 				shaders->updateTexturePS(core, "GrassAlpha", "tex", heapIndex);
-				char buffer[256];
-				sprintf_s(buffer, "drawGrass textureFilenames = %s heapIndex = %d\n", textureFilenames[i].c_str(), heapIndex);
-				OutputDebugStringA(buffer);
+				//char buffer[256];
+				//sprintf_s(buffer, "drawGrass textureFilenames = %s heapIndex = %d\n", textureFilenames[i].c_str(), heapIndex);
+				//OutputDebugStringA(buffer);
 				meshes[i]->draw(core);
 			}
 		}
 		else
 		{
-			shaders->updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &vp);
-			shaders->apply(core, "StaticModel");
+			shaders->updateConstantVS("StaticNormal", "staticMeshBuffer", "VP", &vp);
+			shaders->apply(core, "StaticNormal");
 			psos->bind(core, psoName);
 			for (int i = 0; i < meshes.size(); i++)
 			{
 				int heapIndex = textures->find(textureFilenames[i]);
-				shaders->updateTexturePS(core, "StaticModel", "tex", heapIndex);
-				char buffer[256];
-				sprintf_s(buffer, "drawStaticModel textureFilenames = %s heapIndex = %d\n", textureFilenames[i].c_str(), heapIndex);
-				OutputDebugStringA(buffer);
+				shaders->updateTexturePS(core, "StaticNormal", "albedoTex", heapIndex);
+				heapIndex = textures->find(normalFilenames[i]);
+				shaders->updateTexturePS(core, "StaticNormal", "normalTex", heapIndex);
+				//char buffer[256];
+				//sprintf_s(buffer, "drawStaticModel textureFilenames = %s heapIndex = %d\n", textureFilenames[i].c_str(), heapIndex);
+				//OutputDebugStringA(buffer);
 				meshes[i]->draw(core);
 			}
 		}
@@ -212,9 +225,9 @@ public:
 		for (int i = 0; i < meshes.size(); i++)
 		{
 			shaders->updateTexturePS(core, "AnimatedModel", "tex", textures->find(textureFilenames[i]));
-			char buffer[256];
-			sprintf_s(buffer, "drawAnimatedModel textureFilenames = %s heapIndex = %d\n", textureFilenames[i].c_str(), textures->find(textureFilenames[i]));
-			OutputDebugStringA(buffer);
+			//char buffer[256];
+			//sprintf_s(buffer, "drawAnimatedModel textureFilenames = %s heapIndex = %d\n", textureFilenames[i].c_str(), textures->find(textureFilenames[i]));
+			//OutputDebugStringA(buffer);
 			meshes[i]->draw(core);
 		}
 	}
@@ -224,7 +237,7 @@ class SkyDome
 public:
 	Mesh domeMesh;
 	int texHeapOffset = -1;
-	float radius = 1000.0f;
+	float radius = 500.0f;
 	int latBands = 32;
 	int lonBands = 32;
 	void init(Core* core, PSOManager* psos, TextureManager* textures, Shaders* shaders)
@@ -277,9 +290,9 @@ public:
 		shaders->apply(core, "SkyBox");
 		psos->bind(core, "SkyBoxPSO");
 		shaders->updateTexturePS(core, "SkyBox", "tex", texHeapOffset);
-		char buffer[256];
-		sprintf_s(buffer, "drawSkyBox textureFilenames = %s heapIndex = %d\n", "SKY", texHeapOffset);
-		OutputDebugStringA(buffer);
+		//char buffer[256];
+		//sprintf_s(buffer, "drawSkyBox textureFilenames = %s heapIndex = %d\n", "SKY", texHeapOffset);
+		//OutputDebugStringA(buffer);
 		domeMesh.draw(core);
 	}
 };
@@ -331,7 +344,10 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	acacia.load(&core, "Models/acacia.gem", &shaders, &psos, &textures);
 	StaticModel oak;
 	oak.load(&core, "Models/oak.gem", &shaders, &psos, &textures);
-	/**/StaticModel grassmixA;
+	std::vector<StaticModel*> treeModels;
+	treeModels.push_back(&acacia);
+	treeModels.push_back(&oak);
+	StaticModel grassmixA;
 	grassmixA.load(&core, "Models/Grass_Mix_Full_01a.gem", &shaders, &psos, &textures);
 	StaticModel grassmixB;
 	grassmixB.load(&core, "Models/Grass_Mix_Full_01b.gem", &shaders, &psos, &textures);
@@ -339,12 +355,18 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	grassmixC.load(&core, "Models/Grass_Mix_Full_01c.gem", &shaders, &psos, &textures);
 	StaticModel grassmixD;
 	grassmixD.load(&core, "Models/Grass_Mix_Full_01d.gem", &shaders, &psos, &textures);
+	StaticModel grassmixE;
+	grassmixE.load(&core, "Models/Grass_Mix_Full_01e.gem", &shaders, &psos, &textures); 
+	StaticModel grassmixF;
+	grassmixF.load(&core, "Models/Grass_Mix_Full_01f.gem", &shaders, &psos, &textures);
 	std::vector<StaticModel*> grassModels;
 	grassModels.push_back(&grassmixA);
 	grassModels.push_back(&grassmixB);
 	grassModels.push_back(&grassmixC);
 	grassModels.push_back(&grassmixD);
-	for (int i = 0; i < 200; i++)
+	grassModels.push_back(&grassmixE);
+	grassModels.push_back(&grassmixF);
+	for (int i = 0; i < 500; i++)
 	{
 		Entity grass;
 		grass.staticModel = grassModels[rand() % grassModels.size()];
@@ -355,16 +377,16 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		grass.useAlphaTest = true;
 		worldObjects.push_back(grass);
 	}
-	Entity e1;
-	e1.staticModel = &acacia;
-	e1.position = Vec3(5, 0, 0);
-	e1.scale = 0.01f;
-	worldObjects.push_back(e1);
-	Entity e2;
-	e2.staticModel = &oak;
-	e2.position = Vec3(10, 0, 0);
-	e2.scale = 0.01f;
-	worldObjects.push_back(e2);
+	for (int i = 0; i < 100; i++)
+	{
+		Entity tree;
+		tree.staticModel = treeModels[rand() % treeModels.size()];
+		float randX = randRange(-100.0f, 100.0f);
+		float randZ = randRange(-100.0f, 100.0f);
+		tree.position = Vec3(randX, 0, randZ);
+		tree.scale = 0.01f;
+		worldObjects.push_back(tree);
+	}
 	/**/AnimatedModel animatedModel;
 	animatedModel.load(&core, "Models/TRex.gem", &psos, &shaders, &textures);
 	Entity e3;

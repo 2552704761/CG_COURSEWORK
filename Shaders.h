@@ -173,9 +173,9 @@ public:
 	}
 	void updateTexturePS(Core* core, std::string name, int heapOffset) {
 		UINT bindPoint = textureBindPoints[name];
-		char buffer[256];
-		sprintf_s(buffer, "updateTexturePS: shaderTexName='%s' bindPoint=%u heapOffset=%d\n", name.c_str(), bindPoint, heapOffset);
-		OutputDebugStringA(buffer);
+		//char buffer[256];
+		//sprintf_s(buffer, "updateTexturePS: shaderTexName='%s' bindPoint=%u heapOffset=%d\n", name.c_str(), bindPoint, heapOffset);
+		//OutputDebugStringA(buffer);
 		D3D12_GPU_DESCRIPTOR_HANDLE handle = core->srvHeap.gpuStart;
 		handle.ptr += (UINT64)(heapOffset - bindPoint) * core->srvHeap.incrementSize;
 		core->getCommandList()->SetGraphicsRootDescriptorTable(2, handle);

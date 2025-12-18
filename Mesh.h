@@ -65,6 +65,10 @@ public:
 	D3D12_INDEX_BUFFER_VIEW ibView;
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc;
 	unsigned int numMeshIndices;
+
+	ID3D12Resource* instanceBuffer = nullptr;
+	int instanceCount = 0;
+
 	void init(Core* core, void* vertices, int vertexSizeInBytes, int numVertices, unsigned int* indices, int numIndices)
 	{
 		D3D12_HEAP_PROPERTIES heapprops;

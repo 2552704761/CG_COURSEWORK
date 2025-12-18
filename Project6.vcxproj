@@ -181,9 +181,18 @@
     <Image Include="Models\Textures\acacia branch_ALB.png" />
     <Image Include="Models\Textures\acacia branch_NH.png" />
     <Image Include="Models\Textures\acacia branch_RMAX.png" />
+    <Image Include="Models\Textures\bark05_ALB.png" />
+    <Image Include="Models\Textures\bark05_NH.png" />
+    <Image Include="Models\Textures\bark05_RMAX.png" />
+    <Image Include="Models\Textures\mossybark02_ALB.png" />
+    <Image Include="Models\Textures\mossybark02_NH.png" />
+    <Image Include="Models\Textures\mossybark02_RMAX.png" />
     <Image Include="Models\Textures\oak leaf_ALB.png" />
     <Image Include="Models\Textures\oak leaf_NH.png" />
     <Image Include="Models\Textures\oak leaf_RMAX.png" />
+    <Image Include="Models\Textures\stump03_ALB.png" />
+    <Image Include="Models\Textures\stump03_NH.png" />
+    <Image Include="Models\Textures\stump03_RMAX.png" />
     <Image Include="Models\Textures\T-rex_Base_Color_alb.png" />
     <Image Include="Models\Textures\T-rex_Base_Color_nh.png" />
     <Image Include="Models\Textures\T-rex_Base_Color_rmax.png" />
@@ -213,6 +222,7 @@
     <Text Include="VS.txt" />
     <Text Include="VSAnim.txt" />
     <Text Include="VS_grass.txt" />
+    <Text Include="VS_Instanced.txt" />
     <Text Include="VS_Skybox.TXT" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
