@@ -141,6 +141,24 @@ public:
 			coordTransform.a[1][2] = -1.0f;
 			coordTransform.a[3][3] = 1.0f;
 		}
+		// Print available animation names for debugging
+		if (animation != nullptr)
+		{
+			std::string dbg = "AnimationInstance::init - animations available:\\n";
+			for (const auto& pair : animation->animations)
+			{
+				dbg += "  - " + pair.first + "\\n";
+			}
+			// Also print bone count to help diagnose mismatches
+			char tmp[128];
+			sprintf_s(tmp, "AnimationInstance::init - bone count: %d\\n", animation->bonesSize());
+			dbg += tmp;
+			OutputDebugStringA(dbg.c_str());
+		}
+		else
+		{
+			OutputDebugStringA("AnimationInstance::init - animation is null\\n");
+		}
 	}
 	void update(std::string name, float dt)
 	{

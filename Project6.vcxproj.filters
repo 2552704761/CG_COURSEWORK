@@ -48,6 +48,9 @@
     <ClInclude Include="Texture.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="AABB.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core.cpp">
@@ -71,48 +74,6 @@
       <Filter>资源文件</Filter>
     </None>
     <None Include="Models\oak.gem">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Models\Grass_Beach_01a.gem">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Models\Grass_Beach_01b.gem">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Models\Grass_Beach_01c.gem">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Models\Grass_Beach_01d.gem">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Models\Grass_Beach_01e.gem">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Models\Grass_Beach_01f.gem">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Models\Grass_Beach_01g.gem">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Models\Grass_Beach_01h.gem">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Models\Grass_Beach_01i.gem">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Models\Grass_Beach_01j.gem">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Models\Grass_Beach_01k.gem">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Models\Grass_Beach_01l.gem">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Models\Grass_Beach_01m.gem">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Models\Grass_Beach_01n.gem">
       <Filter>资源文件</Filter>
     </None>
     <None Include="Models\Grass_Mix_Full_01a.gem">
@@ -164,6 +125,12 @@
       <Filter>资源文件</Filter>
     </None>
     <None Include="Models\Grass_Mix_Full_01q.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Uzi.gem">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Models\Bull-dark.gem">
       <Filter>资源文件</Filter>
     </None>
   </ItemGroup>
@@ -267,6 +234,60 @@
     <Image Include="Models\Textures\stump03_RMAX.png">
       <Filter>资源文件</Filter>
     </Image>
+    <Image Include="Models\Textures\arms_1_Albedo_alb.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\arms_1_Albedo_nh.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\arms_1_Albedo_rmax.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\arms_2_Albedo_alb.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\arms_2_Albedo_nh.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\arms_2_Albedo_rmax.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\Uzi_Albedo_alb.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\Uzi_Albedo_nh.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\Uzi_Albedo_rmax.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\Uzi_bullet_shell_Albedo_alb.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\Uzi_bullet_shell_Albedo_nh.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\Uzi_bullet_shell_Albedo_rmax.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\T_Animalstextures_alb.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\T_Animalstextures_nh.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\T_Animalstextures_rmax.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\TX_Ground_Grass_05a_ALB.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\TX_Ground_Grass_05a_NH.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Models\Textures\TX_Ground_Grass_05a_RMAX.png">
+      <Filter>资源文件</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="PSTextured.txt">
@@ -298,6 +319,12 @@
       <Filter>资源文件</Filter>
     </Text>
     <Text Include="VS_Instanced.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="VS_Line.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="PS_Line.txt">
       <Filter>资源文件</Filter>
     </Text>
   </ItemGroup>

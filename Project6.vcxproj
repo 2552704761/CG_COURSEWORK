@@ -123,6 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AABB.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="GEMLoader.h" />
@@ -143,20 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Models\acacia.gem" />
-    <None Include="Models\Grass_Beach_01a.gem" />
-    <None Include="Models\Grass_Beach_01b.gem" />
-    <None Include="Models\Grass_Beach_01c.gem" />
-    <None Include="Models\Grass_Beach_01d.gem" />
-    <None Include="Models\Grass_Beach_01e.gem" />
-    <None Include="Models\Grass_Beach_01f.gem" />
-    <None Include="Models\Grass_Beach_01g.gem" />
-    <None Include="Models\Grass_Beach_01h.gem" />
-    <None Include="Models\Grass_Beach_01i.gem" />
-    <None Include="Models\Grass_Beach_01j.gem" />
-    <None Include="Models\Grass_Beach_01k.gem" />
-    <None Include="Models\Grass_Beach_01l.gem" />
-    <None Include="Models\Grass_Beach_01m.gem" />
-    <None Include="Models\Grass_Beach_01n.gem" />
+    <None Include="Models\Bull-dark.gem" />
     <None Include="Models\Grass_Mix_Full_01a.gem" />
     <None Include="Models\Grass_Mix_Full_01b.gem" />
     <None Include="Models\Grass_Mix_Full_01c.gem" />
@@ -176,11 +164,18 @@
     <None Include="Models\Grass_Mix_Full_01q.gem" />
     <None Include="Models\oak.gem" />
     <None Include="Models\TRex.gem" />
+    <None Include="Models\Uzi.gem" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Models\Textures\acacia branch_ALB.png" />
     <Image Include="Models\Textures\acacia branch_NH.png" />
     <Image Include="Models\Textures\acacia branch_RMAX.png" />
+    <Image Include="Models\Textures\arms_1_Albedo_alb.png" />
+    <Image Include="Models\Textures\arms_1_Albedo_nh.png" />
+    <Image Include="Models\Textures\arms_1_Albedo_rmax.png" />
+    <Image Include="Models\Textures\arms_2_Albedo_alb.png" />
+    <Image Include="Models\Textures\arms_2_Albedo_nh.png" />
+    <Image Include="Models\Textures\arms_2_Albedo_rmax.png" />
     <Image Include="Models\Textures\bark05_ALB.png" />
     <Image Include="Models\Textures\bark05_NH.png" />
     <Image Include="Models\Textures\bark05_RMAX.png" />
@@ -205,6 +200,18 @@
     <Image Include="Models\Textures\TX_Grass_Beach_01a_ALB.png" />
     <Image Include="Models\Textures\TX_Grass_Beach_01a_NH.png" />
     <Image Include="Models\Textures\TX_Grass_Beach_01a_RMAX.png" />
+    <Image Include="Models\Textures\TX_Ground_Grass_05a_ALB.png" />
+    <Image Include="Models\Textures\TX_Ground_Grass_05a_NH.png" />
+    <Image Include="Models\Textures\TX_Ground_Grass_05a_RMAX.png" />
+    <Image Include="Models\Textures\T_Animalstextures_alb.png" />
+    <Image Include="Models\Textures\T_Animalstextures_nh.png" />
+    <Image Include="Models\Textures\T_Animalstextures_rmax.png" />
+    <Image Include="Models\Textures\Uzi_Albedo_alb.png" />
+    <Image Include="Models\Textures\Uzi_Albedo_nh.png" />
+    <Image Include="Models\Textures\Uzi_Albedo_rmax.png" />
+    <Image Include="Models\Textures\Uzi_bullet_shell_Albedo_alb.png" />
+    <Image Include="Models\Textures\Uzi_bullet_shell_Albedo_nh.png" />
+    <Image Include="Models\Textures\Uzi_bullet_shell_Albedo_rmax.png" />
     <Image Include="sky\sky1.png" />
     <Image Include="sky\sky2.png" />
     <Image Include="sky\sky3.png" />
@@ -218,11 +225,13 @@
     <Text Include="PSTextured.txt" />
     <Text Include="PSUntextured.txt" />
     <Text Include="PS_AlphaTest.txt" />
+    <Text Include="PS_Line.txt" />
     <Text Include="PS_Skybox.TXT" />
     <Text Include="VS.txt" />
     <Text Include="VSAnim.txt" />
     <Text Include="VS_grass.txt" />
     <Text Include="VS_Instanced.txt" />
+    <Text Include="VS_Line.txt" />
     <Text Include="VS_Skybox.TXT" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,7 +1,13 @@
 Texture2D albedoTex : register(t0);
 Texture2D normalTex : register(t1);
 SamplerState samplerLinear : register(s0);
-
+cbuffer LightCB : register(b0)
+{
+    float3 lightDir;
+    float  pad0;
+    float3 lightColor;
+    float  pad1;
+};
 struct PS_INPUT
 {
     float4 Pos       : SV_POSITION;
@@ -25,12 +31,12 @@ float4 PS(PS_INPUT input) : SV_Target0
 
     float3 worldNormal = normalize(mul(mapNormal, TBN));
     worldNormal = normalize(lerp(worldNormal, float3(0,1,0), 0.3));
-    float3 lightDir = normalize(float3(0.3f, 1.0f, 0.2f));
-    float NdotL = saturate(dot(worldNormal, lightDir));
+    float3 LD = normalize(-lightDir);
+    float NdotL = saturate(dot(worldNormal, LD));
 
     float3 albedo = albedoTex.Sample(samplerLinear, input.TexCoords).rgb;
-    float3 color = albedo * NdotL;
-
-    return float4(color, 1.0f);
+    float3 color = albedo * lightColor * NdotL;
+    float3 ambient = albedo * 0.2f;
+    return float4(color + ambient, 1.0f);
 }
 

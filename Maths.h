@@ -40,10 +40,16 @@ public:
 	Vec3& operator*=(const float v) { x *= v, y *= v, z *= v; return *this; }
 	Vec3& operator/=(const float v) { float iv = 1.0f / v; x *= iv, y *= iv, z *= iv; return *this; }
 	Vec3 operator-() const { return Vec3(-x, -y, -z); }
+	float& operator[](int idx) { return coords[idx]; }
+	const float& operator[](int idx) const { return coords[idx]; }
 	float length() const { return sqrtf(SQ(x) + SQ(y) + SQ(z)); }
 	float lengthSq() const { return (SQ(x) + SQ(y) + SQ(z)); }
 	Vec3 normalize() const { float l = 1.0f / sqrtf(SQ(x) + SQ(y) + SQ(z)); return Vec3(x * l, y * l, z * l); }
 	float normalize_getLength() { float l = sqrtf(SQ(x) + SQ(y) + SQ(z)); float il = 1.0f / l; x *= il; y *= il; z *= il; return l; }
+	inline Vec3 lerp(const Vec3& a, const Vec3& b, float t)
+	{
+		return a * (1.0f - t) + b * t;
+	}
 };
 
 static float Dot(const Vec3& v1, const Vec3& v2) { return ((v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z)); }
@@ -177,14 +183,14 @@ public:
 	{
 		return mul(matrix);
 	}
-	Vec3 mulVec(const Vec3& v)
+	Vec3 mulVec(const Vec3& v) const
 	{
 		return Vec3(
 			(v.x * m[0] + v.y * m[1] + v.z * m[2]),
 			(v.x * m[4] + v.y * m[5] + v.z * m[6]),
 			(v.x * m[8] + v.y * m[9] + v.z * m[10]));
 	}
-	Vec3 mulPoint(const Vec3& v)
+	Vec3 mulPoint(const Vec3& v) const
 	{
 		Vec3 v1 = Vec3(
 			(v.x * m[0] + v.y * m[1] + v.z * m[2]) + m[3],
@@ -192,8 +198,12 @@ public:
 			(v.x * m[8] + v.y * m[9] + v.z * m[10]) + m[11]);
 		float w;
 		w = (m[12] * v.x) + (m[13] * v.y) + (m[14] * v.z) + m[15];
-		w = 1.0f / w;
-		return (v1 * w);
+		if (fabsf(w - 1.0f) > 1e-6f && fabsf(w) > 1e-9f)
+		{
+			float iw = 1.0f / w;
+			return (v1 * iw);
+		}
+		return v1;
 	}
 	Matrix operator=(const Matrix& matrix)
 	{
@@ -540,3 +550,7 @@ Vec3 sphericalToVector(const float theta, const float phi)
 	float st = sqrtf(1.0f - (ct * ct));
 	return Vec3(sinf(phi) * st, ct, cosf(phi) * st);
 }
+
+#ifndef PI
+#define PI 3.14159265358979323846f
+#endif

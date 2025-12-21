@@ -11,6 +11,7 @@ struct VS_INPUT
     float3 Normal : NORMAL;
     float3 Tangent : TANGENT;
     float2 TexCoords : TEXCOORD;
+    float4x4 World : WORLD;
 };
 
 struct PS_INPUT
@@ -24,7 +25,8 @@ struct PS_INPUT
 PS_INPUT VS(VS_INPUT input)
 {
     PS_INPUT output;
-    output.Pos = mul(input.Pos, W);
+
+    output.Pos = mul(input.Pos, input.World);
     float windStrength = 0.2f;
     float windSpeed    = 2.0f;
     float heightFactor = saturate(input.Pos.y);
@@ -34,8 +36,8 @@ PS_INPUT VS(VS_INPUT input)
         heightFactor;
     output.Pos.xz += windOffset * float2(1, 0.3);
     output.Pos = mul(output.Pos, VP);
-    output.Normal = mul(input.Normal, W);
-    output.Tangent = mul(input.Tangent, W);
+    output.Normal = mul(input.Normal, input.World);
+    output.Tangent = mul(input.Tangent, input.World);
     output.TexCoords = input.TexCoords;
     return output;
 }
