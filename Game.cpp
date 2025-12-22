@@ -700,6 +700,7 @@ void updateTRex(Entity& e, const Vec3& playerPos, float dt)
 }
 void updateEntity(Entity& e, const Vec3& playerPos, float dt)
 {
+	//Distinguishing Unit Logic
 	if (e.isanimal)
 	{
 		updateBullAnimation(e, dt);
@@ -1201,7 +1202,6 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 			if (playerAnimInstance.animation != nullptr && playerAnimInstance.animation->hasAnimation("00 pose"))
 				playerAnimInstance.update("00 pose", dt);
 		}
-
 		playermodel.draw(&core, &shaders, &psos, &textures, &playerAnimInstance, p);
 		if (playerAnimInstance.animationFinished() == true)
 		{
